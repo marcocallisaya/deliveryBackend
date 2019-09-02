@@ -2,7 +2,8 @@
 
 namespace App;
 
-
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Http\Middleware\Authenticate;
 use App\Transformers\ClienteTransformer;
 use Illuminate\Database\Eloquent\Model;
 
@@ -12,7 +13,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class Cliente extends Model implements JWTSubject
+class Cliente extends Authenticatable implements JWTSubject
 {
     use SoftDeletes;
     protected $dates = ['deleted_at'];

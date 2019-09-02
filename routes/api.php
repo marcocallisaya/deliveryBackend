@@ -52,13 +52,13 @@ Route::resource('categoria.productos','Categoria\CategoriaProductosController',[
 Route::resource('productos','Producto\ProductoController',['except'=>['create','edit']]);
 Route::resource('producto.categoria','Producto\ProductoCategoriaController',['only'=>['index']]);
 Route::resource('producto.proveedor','Producto\ProductoProveedorController',['only'=>['index']]);
-/*
+
 Route::group([
     'prefix' => 'auth',
 ], function () {
-    Route::post('login', 'ClienteController@login');
-    Route::post('logout', 'ClienteController@logout');
-    Route::post('refresh', 'ClienteController@refresh');
-    Route::post('me', 'ClienteController@me');
-});*/
+    Route::post('login', 'Cliente\ClienteController@login');
+    Route::post('logout', 'Cliente\ClienteController@logout');
+    Route::post('refresh', 'Cliente\ClienteController@refresh');
+    Route::post('me', 'Cliente\ClienteController@me');
+});
  
