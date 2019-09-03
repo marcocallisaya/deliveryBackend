@@ -12,6 +12,7 @@ class ClienteController extends ApiController
 {
     public function __construct()
     {
+        $this->middleware('jwt', ['except' => ['login']]);
        // $this->middleware('guest:empleados')->except('logout');
        // $this->middleware('auth:empleados');
         $this->middleware('transform:' . ClienteTransformer::class)->only(['store','update']);

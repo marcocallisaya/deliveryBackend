@@ -24,6 +24,7 @@ class Cliente extends Authenticatable implements JWTSubject
         'name','lastname', 'email', 'password', 'direction', 'phone', 'carnet'
     ];
 
+   
     protected $hidden = ['password'];
     public function pedidos()
     {

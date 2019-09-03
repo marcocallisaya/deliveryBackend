@@ -61,4 +61,13 @@ Route::group([
     Route::post('refresh', 'Cliente\ClienteController@refresh');
     Route::post('me', 'Cliente\ClienteController@me');
 });
+
+Route::group([
+    'prefix' => 'au',
+], function () {
+    Route::post('login', 'Empleado\EmpleadoController@login');
+    Route::post('logout', 'Empleado\EmpleadoController@logout');
+    Route::post('refresh', 'Empleado\EmpleadoController@refresh');
+    Route::post('me', 'Empleado\EmpleadoController@me');
+});
  
