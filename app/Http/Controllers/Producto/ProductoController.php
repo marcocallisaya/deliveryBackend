@@ -12,6 +12,7 @@ class ProductoController extends ApiController
 {
     public function __construct()
     {
+        $this->middleware('jwt', ['except' => ['login']]);
         $this->middleware('transform:' . ProductoTransformer::class)->only(['store','update']);
     }
     /**

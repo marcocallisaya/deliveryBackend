@@ -53,6 +53,15 @@ Route::resource('productos','Producto\ProductoController',['except'=>['create','
 Route::resource('producto.categoria','Producto\ProductoCategoriaController',['only'=>['index']]);
 Route::resource('producto.proveedor','Producto\ProductoProveedorController',['only'=>['index']]);
 
+
+Route::resource('conductores','Conductor\ConductorController',['only'=>['index','show']]);
+Route::resource('conductor.auto','Conductor\ConductorAutoController',['only'=>['index']]);
+
+Route::resource('administradores','Administrador\AdministradorController',['only'=>['index','show']]);
+
+
+Route::resource('autos','Auto\AutoController',['except'=>['create','edit','destroy']]);
+
 Route::group([
     'prefix' => 'auth',
 ], function () {

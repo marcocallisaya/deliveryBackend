@@ -11,6 +11,7 @@ class PedidoController extends ApiController
 {
     public function __construct()
     {
+        $this->middleware('jwt', ['except' => ['login']]);
         $this->middleware('transform:' . PedidoTransformer::class)->only(['store','update']);
     }
     /**

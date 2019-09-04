@@ -13,6 +13,7 @@ class ReservaController extends ApiController
 {
     public function __construct()
     {
+        $this->middleware('jwt', ['except' => ['login']]);
         $this->middleware('transform:' . ReservaTransformer::class)->only(['store','update']);
     }
     /**

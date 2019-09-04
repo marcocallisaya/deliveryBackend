@@ -11,6 +11,7 @@ class EmpleadoController extends ApiController
 {
     public function __construct()
     {
+        $this->middleware('jwt', ['except' => ['login']]);
         $this->middleware('transform:' . EmpleadoTransformer::class)->only(['store','update']);
     }
     /**
@@ -136,11 +137,11 @@ class EmpleadoController extends ApiController
      */
     public function me()
     {
-        return response()->json(auth()->user());
+        return response()->json(auth()->guard('app')->user());
     }
     public function payload()
     {
-        return response()->json(auth()->payload());
+        return response()->json(auth()->guard('app')->payload());
     }
     /**
      * Log the user out (Invalidate the token).
@@ -149,7 +150,7 @@ class EmpleadoController extends ApiController
      */
     public function logout()
     {
-        auth()->logout();
+        auth()->guard('app')->logout();
         return response()->json(['message' => 'Successfully logged out']);
     }
     /**
@@ -159,7 +160,7 @@ class EmpleadoController extends ApiController
      */
     public function refresh()
     {
-        return $this->respondWithToken(auth()->refresh());
+        return $this->respondWithToken(auth()->guard('app')->refresh());
     }
     /**
      * Get the token array structure.
@@ -173,7 +174,7 @@ class EmpleadoController extends ApiController
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 60,
+            'expires_in' => auth()->guard('app')->factory()->getTTL() * 60,
             'user' => auth()->guard('app')->user(),
         ]);
     }

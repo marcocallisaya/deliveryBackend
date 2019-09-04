@@ -18,10 +18,16 @@ class Pedido extends Model
 
     protected $fillable = ['price','state','cliente_id','empleado_id'];
 
-    public function empleado()
+    public function administrador()
     {
-        return $this->belongsTo(Empleado::class);
+        return $this->belongsTo(Administrador::class);
     }
+
+    public function conductor()
+    {
+        return $this->belongsTo(Conductor::class);
+    }
+
 
     public function cliente()
     {

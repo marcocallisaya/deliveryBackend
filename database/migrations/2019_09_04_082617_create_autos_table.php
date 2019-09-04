@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePedidosTable extends Migration
+class CreateAutosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,19 +13,14 @@ class CreatePedidosTable extends Migration
      */
     public function up()
     {
-        Schema::create('pedidos', function (Blueprint $table) {
+        Schema::create('autos', function (Blueprint $table) {
             $table->increments('id');
-            $table->double('price');
-            $table->string('state');
-            $table->integer('cliente_id')->unsigned();
+            $table->string('modelo');
+            $table->string('placa');
             $table->integer('conductor_id')->unsigned();
-            $table->integer('administrador_id')->unsigned();
             $table->timestamps();
-            $table->softDeletes();
-            $table->engine = 'InnoDB';
-            $table->foreign('cliente_id')->references('id')->on('clientes');
+
             $table->foreign('conductor_id')->references('id')->on('empleados');
-            $table->foreign('administrador_id')->references('id')->on('empleados');
         });
     }
 
@@ -36,6 +31,6 @@ class CreatePedidosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pedidos');
+        Schema::dropIfExists('autos');
     }
 }

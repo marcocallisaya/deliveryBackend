@@ -15,6 +15,9 @@ class Empleado extends Authenticatable implements JWTSubject
 
     protected $dates = ['deleted_at'];
 
+    const CAJERO = 'Cajero';
+    const CONDUCTOR = 'Chofer';
+
     protected $guard = 'empleados';
 
     public $transformer = EmpleadoTransformer::class;
@@ -30,10 +33,7 @@ class Empleado extends Authenticatable implements JWTSubject
         return $this->belongsTo(Sucursal::class);
     }
 
-    public function pedidos()
-    {
-        return $this->hasMany(Pedido::class);
-    }
+   
 
      /**
      * Get the identifier that will be stored in the subject claim of the JWT.

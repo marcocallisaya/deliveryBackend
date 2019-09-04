@@ -11,6 +11,7 @@ class CategoriaController extends ApiController
 {
     public function __construct()
     {
+        $this->middleware('jwt', ['except' => ['login']]);
         $this->middleware('transform:' . CategoriaTransformer::class)->only(['store','update']);
     }
 
