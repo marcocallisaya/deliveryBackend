@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Cliente;
 
 use App\Cliente;
+use App\Empleado;
 use Illuminate\Http\Request;
 use App\Http\Controllers\ApiController;
 use App\Transformers\ClienteTransformer;
@@ -178,6 +179,7 @@ class ClienteController extends ApiController
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
+            'type'=> 'cliente',
             'expires_in' => auth()->factory()->getTTL() * 60,
             'user' => auth()->user(),
         ]);

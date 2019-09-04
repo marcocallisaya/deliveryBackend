@@ -174,6 +174,7 @@ class EmpleadoController extends ApiController
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
+            'type'=> auth()->guard('app')->user()->position,
             'expires_in' => auth()->guard('app')->factory()->getTTL() * 60,
             'user' => auth()->guard('app')->user(),
         ]);

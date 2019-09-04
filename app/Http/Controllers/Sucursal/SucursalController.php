@@ -11,6 +11,8 @@ class SucursalController extends ApiController
 {
     public function __construct()
     {
+        
+        $this->middleware('jwt', ['except' => ['login']]);
         $this->middleware('transform:' . SucursalTransformer::class)->only(['store','update']);
     }
     /**
