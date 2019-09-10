@@ -80,7 +80,7 @@ trait ApiResponser
 
         $page = LengthAwarePaginator::resolveCurrentPage();
 
-        $per_page = 1;
+        $per_page = 5;
 
         if (request()->has('per_page'))
         {
