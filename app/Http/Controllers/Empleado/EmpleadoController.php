@@ -11,7 +11,7 @@ class EmpleadoController extends ApiController
 {
     public function __construct()
     {
-        $this->middleware('jwt', ['except' => ['login']]);
+        //$this->middleware('jwt', ['except' => ['login']]);
         $this->middleware('transform:' . EmpleadoTransformer::class)->only(['store','update']);
     }
     /**
@@ -26,6 +26,17 @@ class EmpleadoController extends ApiController
         return $this->showAll($empleados,200);
     }
 
+    public function busqueda(Request $request)
+    {
+        $filtro = $request->filtro;
+       $empleados = Empleado::where('name', 'like','%'.$filtro.'%')->get();
+       collect($empleados)->filter(function ($item) use ($filtro) {
+        // replace stristr with your choice of matching function
+        return false !== stristr($item->name, $filtro);
+    });
+        return 
+        $this->showAll($empleados);
+    }
     
 
     /**

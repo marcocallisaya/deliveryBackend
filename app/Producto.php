@@ -10,7 +10,7 @@ class Producto extends Model
 {
     use SoftDeletes;
     protected $dates = ['deleted_at'];
-
+    protected $table = 'productos';
     public $transformer = ProductoTransformer::class;
 
     protected $fillable=['name','price','img','stock','order','state','proveedor_id', 'categoria_id'];

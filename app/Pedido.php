@@ -20,7 +20,7 @@ class Pedido extends Model
 
     public function administrador()
     {
-        return $this->belongsTo(Administrador::class);
+        return $this->belongsTo(Empleado::class);
     }
 
     public function conductor()

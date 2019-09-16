@@ -13,7 +13,7 @@ class ReservaController extends ApiController
 {
     public function __construct()
     {
-        $this->middleware('jwt', ['except' => ['login']]);
+       // $this->middleware('jwt', ['except' => ['login']]);
         $this->middleware('transform:' . ReservaTransformer::class)->only(['store','update']);
     }
     /**
@@ -28,7 +28,15 @@ class ReservaController extends ApiController
         return $this->showAll($reservas,200);
     }
 
-  
+    public function busqueda(Request $request)
+    {
+        $filtro = $request->filtro;
+       $reservas = Reserva::where('id','=',$filtro)->get();
+    
+       
+        return 
+        $this->showAll($reservas);
+    }
 
     /**
      * Store a newly created resource in storage.

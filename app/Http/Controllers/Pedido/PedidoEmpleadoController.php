@@ -10,7 +10,7 @@ class PedidoEmpleadoController extends ApiController
 {
     public function index(Pedido $pedido)
     {
-        $empleado = $pedido->empleado;
+        $empleado = $pedido->administrador;
 
         return $this->showOne($empleado,200);
     }

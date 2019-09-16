@@ -12,7 +12,7 @@ class ProductoController extends ApiController
 {
     public function __construct()
     {
-        $this->middleware('jwt', ['except' => ['login']]);
+       // $this->middleware('jwt', ['except' => ['login']]);
         $this->middleware('transform:' . ProductoTransformer::class)->only(['store','update']);
     }
     /**
@@ -27,7 +27,17 @@ class ProductoController extends ApiController
         return $this->showAll($productos,200);
     }
 
-   
+    public function busqueda(Request $request)
+    {
+        $filtro = $request->filtro;
+       $productos = Producto::where('name', 'like','%'.$filtro.'%')->get();
+       collect($productos)->filter(function ($item) use ($filtro) {
+        // replace stristr with your choice of matching function
+        return false !== stristr($item->name, $filtro);
+    });
+        return 
+        $this->showAll($productos);
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -53,12 +63,16 @@ class ProductoController extends ApiController
 
         $data = $request->all();
         
-        $data['img'] = $request->img->store('');
+       // $data['img'] = $request->img->store('');
         
         $producto = Producto::create($data);
 
         $producto->save();
+        $sucursal = $request->sucursal;
 
+        $producto->sucursales()->syncWithoutDetaching($sucursal);
+
+       // $sucursal->productos()->syncWithoutDetaching([$codigo]);
 
         return $this->showOne($producto,200);
     }
@@ -89,11 +103,11 @@ class ProductoController extends ApiController
 
         $producto->fill($data);
 
-        if ($request->hasFile('img')) {
+       /*  if ($request->hasFile('img')) {
             Storage::delete($producto->img);
             $producto->img = $request->img->store('');
         }
-
+ */
        
 
         if ($producto->isClean())
@@ -114,7 +128,7 @@ class ProductoController extends ApiController
      */
     public function destroy(Producto $producto)
     {
-        Storage::delete($producto->img);
+        //Storage::delete($producto->img);
         $producto->delete();
 
         return $this->showOne($producto,200);

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Sucursal;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\ApiController;
+use App\Producto;
 use App\Sucursal;
 
 class SucursalProductosController extends ApiController
@@ -13,5 +14,5 @@ class SucursalProductosController extends ApiController
          $productos = $sucursal->productos;
 
         return $this->showAll($productos,200);
-    }
+    }  
 }

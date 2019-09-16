@@ -33,7 +33,10 @@ class Empleado extends Authenticatable implements JWTSubject
         return $this->belongsTo(Sucursal::class);
     }
 
-   
+    public function pedidos()
+    {
+        return $this->hasMany(Pedido::class);
+    }
 
      /**
      * Get the identifier that will be stored in the subject claim of the JWT.

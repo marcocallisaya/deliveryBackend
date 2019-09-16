@@ -27,6 +27,17 @@ class SucursalController extends ApiController
         return $this->showAll($sucursales,200);
     }
 
+    public function busqueda(Request $request)
+    {
+        $filtro = $request->filtro;
+       $sucursales = Sucursal::where('name', 'like','%'.$filtro.'%')->get();
+       collect($sucursales)->filter(function ($item) use ($filtro) {
+        // replace stristr with your choice of matching function
+        return false !== stristr($item->name, $filtro);
+    });
+        return 
+        $this->showAll($sucursales);
+    }
     
 
     /**

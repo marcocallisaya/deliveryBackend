@@ -11,7 +11,7 @@ class PedidoController extends ApiController
 {
     public function __construct()
     {
-        $this->middleware('jwt', ['except' => ['login']]);
+       // $this->middleware('jwt', ['except' => ['login']]);
         $this->middleware('transform:' . PedidoTransformer::class)->only(['store','update']);
     }
     /**
@@ -26,6 +26,16 @@ class PedidoController extends ApiController
         return $this->showAll($pedidos,200);
     }
 
+
+    public function busqueda(Request $request)
+    {
+        $filtro = $request->filtro;
+       $pedidos = Pedido::where('id','=',$filtro)->get();
+    
+       
+        return 
+        $this->showAll($pedidos);
+    }
 
     /**
      * Store a newly created resource in storage.

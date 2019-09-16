@@ -13,7 +13,7 @@ class ClienteController extends ApiController
 {
     public function __construct()
     {
-        $this->middleware('jwt', ['except' => ['login']]);
+  //      $this->middleware('jwt', ['except' => ['login']]);
        // $this->middleware('guest:empleados')->except('logout');
        // $this->middleware('auth:empleados');
         $this->middleware('transform:' . ClienteTransformer::class)->only(['store','update']);
@@ -31,7 +31,17 @@ class ClienteController extends ApiController
         return $this->showAll($clientes,200);
     }
 
-  
+    public function busqueda(Request $request)
+    {
+        $filtro = $request->filtro;
+       $clientes = Cliente::where('name', 'like','%'.$filtro.'%')->get();
+       collect($clientes)->filter(function ($item) use ($filtro) {
+        // replace stristr with your choice of matching function
+        return false !== stristr($item->name, $filtro);
+    });
+        return 
+        $this->showAll($clientes);
+    }
 
     /**
      * Store a newly created resource in storage.

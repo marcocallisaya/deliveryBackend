@@ -23,9 +23,9 @@ trait ApiResponser
 
         $transformer = $collection->first()->transformer;
 
-        $collection = $this->filterData($collection,$transformer);
+       // $collection = $this->filterData($collection,$transformer);
         $collection = $this->sortData($collection,$transformer);
-        $collection = $this->pagination($collection,$transformer);
+      //  $collection = $this->pagination($collection,$transformer);
         $collection = $this->transformData($collection,$transformer);
         return $this->successResponse($collection,$code);
     }
@@ -65,8 +65,10 @@ trait ApiResponser
             $attribute = $transformer::original($query);
 
             if(isset($attribute,$value))
+
             {
                 $collection = $collection->where($attribute,$value);
+                
             }
         }
         return $collection;

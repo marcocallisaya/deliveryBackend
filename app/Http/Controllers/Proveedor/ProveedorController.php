@@ -11,7 +11,7 @@ class ProveedorController extends ApiController
 {
     public function __construct()
     {
-        $this->middleware('jwt', ['except' => ['login']]);
+       // $this->middleware('jwt', ['except' => ['login']]);
         $this->middleware('transform:' . ProveedorTransformer::class)->only(['store','update']);
     }
     /**
@@ -26,7 +26,17 @@ class ProveedorController extends ApiController
         return $this->showAll($proveedores,200);
     }
 
-    
+    public function busqueda(Request $request)
+    {
+        $filtro = $request->filtro;
+       $proveedores = Proveedor::where('name', 'like','%'.$filtro.'%')->get();
+       collect($proveedores)->filter(function ($item) use ($filtro) {
+        // replace stristr with your choice of matching function
+        return false !== stristr($item->name, $filtro);
+    });
+        return 
+        $this->showAll($proveedores);
+    }
 
     /**
      * Store a newly created resource in storage.

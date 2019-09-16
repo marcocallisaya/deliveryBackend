@@ -12,7 +12,7 @@ class AutoController extends ApiController
     public function __construct()
     {
        
-            $this->middleware('jwt', ['except' => ['login']]);       
+          //  $this->middleware('jwt', ['except' => ['login']]);       
         $this->middleware('transform:' . AutoTransformer::class)->only(['store','update']);
     }
     /**
@@ -24,10 +24,21 @@ class AutoController extends ApiController
     {
         $autos = Auto::all();
 
-        return $this->showAll($autos,200);
+        return 
+       $this->showAll($autos,200);
     }
 
-    
+    public function busqueda(Request $request)
+    {
+        $filtro = $request->filtro;
+       $categorias = Auto::where('placa', 'like','%'.$filtro.'%')->get();
+       collect($categorias)->filter(function ($item) use ($filtro) {
+        // replace stristr with your choice of matching function
+        return false !== stristr($item->name, $filtro);
+    });
+        return 
+        $this->showAll($categorias);
+    }
 
     /**
      * Store a newly created resource in storage.

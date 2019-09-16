@@ -19,7 +19,8 @@ class PedidoTransformer extends TransformerAbstract
             'precio'=> (double)$pedido->price,
             'estado'=>(string)$pedido->state,
             'cliente'=>(int)$pedido->cliente_id,
-            'empleado'=>(int)$pedido->empleado_id,
+            'conductor'=>(int)$pedido->conductor_id,
+            'administrador'=>(int)$pedido->administrador_id,
             'fechaCreacion'=>(string)$pedido->created_at,
             'ultimaActualizacion'=>(string)$pedido->updated_at
         ];
@@ -32,7 +33,8 @@ class PedidoTransformer extends TransformerAbstract
             'precio'=> 'price',
             'estado'=>'state',
             'cliente'=>'cliente_id',
-            'empleado'=>'empleado_id',
+            'conductor'=>'conductor_id',
+            'administrador'=>'administrador_id',
             'fechaCreacion'=>'created_at',
             'ultimaActualizacion'=>'updated_at'
         ];

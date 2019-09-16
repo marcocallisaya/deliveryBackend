@@ -24,34 +24,48 @@ use Illuminate\Http\Request;
 
 Route::resource('sucursals','Sucursal\SucursalController',['except'=>['create','edit']]);
 Route::resource('sucursals.empleados','Sucursal\SucursalEmpleadosController',['only'=>['index']]);
+Route::get('sucursalsB','Sucursal\SucursalController@busqueda');
 
 Route::resource('sucursals.pedidos','Sucursal\SucursalPedidosController',['only'=>['index']]);
-Route::resource('sucursals.productos','Sucursal\SucursalProductosController',['only'=>['index']]);
+Route::resource('sucursals.productos','Sucursal\SucursalProductosController',['only'=>['index','show']]);
 
 
 Route::resource('clientes','Cliente\ClienteController',['except'=>['create','edit']]);
 Route::resource('cliente.pedidos','Cliente\ClientePedidosController',['only'=>['index']]);
 Route::resource('cliente.reservas','Cliente\ClienteReservasController',['only'=>['index']]);
+Route::get('clientesB','Cliente\ClienteController@busqueda');
+
 
 Route::resource('empleados','Empleado\EmpleadoController',['except'=>['create','edit']]);
 Route::resource('empleado.pedidos','Empleado\EmpleadoPedidosController',['only'=>['index']]);
+Route::get('empleadosB','Empleado\EmpleadoController@busqueda');
 
 Route::resource('pedidos','Pedido\PedidoController',['except'=>['create','edit']]);
 Route::resource('pedido.cliente','Pedido\PedidoClienteController',['only'=>['index']]);
 Route::resource('pedido.empleado','Pedido\PedidoEmpleadoController',['only'=>['index']]);
 Route::resource('pedido.productos','Pedido\PedidoProductosController',['only'=>['index','store']]);
 
+Route::get('pedidosB','Pedido\PedidoController@busqueda');
+
+
 Route::resource('reservas','Reserva\ReservaController',['except'=>['create','edit']]);
+Route::get('reservasB','Reserva\ReservaController@busqueda');
+
 
 Route::resource('proveedores','Proveedor\ProveedorController',['except'=>['create','edit']]);
 Route::resource('proveedor.productos','Proveedor\ProveedorProductosController',['only'=>['index']]);
+Route::get('proveedoresB','Proveedor\ProveedorController@busqueda');
+
 
 Route::resource('categorias','Categoria\CategoriaController',['except'=>['create','edit']]);
 Route::resource('categoria.productos','Categoria\CategoriaProductosController',['only'=>['index']]);
+Route::get('categoriasB','Categoria\CategoriaController@busqueda');
+
 
 Route::resource('productos','Producto\ProductoController',['except'=>['create','edit']]);
 Route::resource('producto.categoria','Producto\ProductoCategoriaController',['only'=>['index']]);
 Route::resource('producto.proveedor','Producto\ProductoProveedorController',['only'=>['index']]);
+Route::get('productosB','Producto\ProductoController@busqueda');
 
 
 Route::resource('conductores','Conductor\ConductorController',['only'=>['index','show']]);
@@ -61,6 +75,8 @@ Route::resource('administradores','Administrador\AdministradorController',['only
 
 
 Route::resource('autos','Auto\AutoController',['except'=>['create','edit','destroy']]);
+Route::get('autosB','Auto\AutoController@busqueda');
+
 
 Route::group([
     'prefix' => 'auth',
