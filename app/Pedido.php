@@ -15,6 +15,7 @@ class Pedido extends Model
 
     const FINALIZADO = 'finalizado';
     const RESERVA = 'reserva';
+    const ESPERA = 'espera';
 
     protected $fillable = ['price','state','cliente_id','conductor_id','administrador_id'];
 

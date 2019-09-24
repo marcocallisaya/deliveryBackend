@@ -17,7 +17,7 @@ class CreateProductosTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->double('price')->default(0);
-            $table->string('img');
+            $table->string('img',2048);
             $table->string('state');
             $table->integer('stock')->default(0);
             $table->integer('order')->default(0);

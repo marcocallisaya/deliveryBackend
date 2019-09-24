@@ -51,7 +51,7 @@ class PedidoProductosController extends ApiController
         return $this->showOne($producto);
     }
 
-    if ($pedido->state==Pedido::FINALIZADO  && $this->Disponible($producto,$cantidad))
+    if ($pedido->state==Pedido::ESPERA  && $this->Disponible($producto,$cantidad))
     {
         $producto->stock =  $producto->stock-$cantidad;
         $producto->save();

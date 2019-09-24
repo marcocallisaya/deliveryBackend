@@ -50,7 +50,7 @@ Route::get('pedidosB','Pedido\PedidoController@busqueda');
 
 Route::resource('reservas','Reserva\ReservaController',['except'=>['create','edit']]);
 Route::get('reservasB','Reserva\ReservaController@busqueda');
-
+Route::get('cantidad','Reserva\ReservaController@cantidad');
 
 Route::resource('proveedores','Proveedor\ProveedorController',['except'=>['create','edit']]);
 Route::resource('proveedor.productos','Proveedor\ProveedorProductosController',['only'=>['index']]);

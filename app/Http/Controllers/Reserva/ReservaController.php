@@ -111,6 +111,8 @@ class ReservaController extends ApiController
      */
     public function destroy(Reserva $reserva)
     {
+
+
         
           $pedido_id = $reserva->pedido_id;
 
@@ -148,5 +150,17 @@ class ReservaController extends ApiController
         return $this->showOne($reserva,200);
 
        
+    }
+
+    public function cantidad(Request $request)
+    {
+        $pedido_id = $request->pedido;
+        $producto_id = $request->producto;
+
+        $cantidad =   DB::table('pedido_producto')
+        ->where('pedido_id', $pedido_id)
+        ->where('producto_id', $producto_id)->value('quantity');
+
+        return response()->json(['cantidad'=>$cantidad],200);
     }
 }
