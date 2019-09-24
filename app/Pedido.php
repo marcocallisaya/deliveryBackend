@@ -16,7 +16,7 @@ class Pedido extends Model
     const FINALIZADO = 'finalizado';
     const RESERVA = 'reserva';
 
-    protected $fillable = ['price','state','cliente_id','empleado_id'];
+    protected $fillable = ['price','state','cliente_id','conductor_id','administrador_id'];
 
     public function administrador()
     {

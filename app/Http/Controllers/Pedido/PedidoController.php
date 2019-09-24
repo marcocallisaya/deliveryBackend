@@ -49,7 +49,8 @@ class PedidoController extends ApiController
             'price'=>'required',
             'state'=>'required',
             'cliente_id'=>'required',
-            'empleado_id'=>'required'
+            'conductor_id'=>'required',
+            'administrador_id'=>'required'
         ];
 
         $this->validate($request,$rules);

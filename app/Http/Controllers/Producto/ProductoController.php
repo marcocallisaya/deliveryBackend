@@ -49,7 +49,7 @@ class ProductoController extends ApiController
     {
 
    
-  /*       $rules = [
+        $rules = [
             'name'=>'required',
             'price'=>'required',
             'img'=>'required',
@@ -59,22 +59,30 @@ class ProductoController extends ApiController
             'categoria_id'=>'required'
         ];
 
-        $this->validate($request,$rules); */
+        $this->validate($request,$rules); 
 
         $data = $request->all();
         
-       // $data['img'] = $request->img->store('');
         
-        $producto = Producto::create($data);
+        //if ($request->is_file('img')) {
+         //   $data['img'] = $request->img->store('');
+        
+       
+            $producto = Producto::create($data);
+    
+            $producto->save();
+            $sucursal = $request->sucursal;
+    
+            $producto->sucursales()->syncWithoutDetaching($sucursal);
 
-        $producto->save();
-        $sucursal = $request->sucursal;
+            return $this->showOne($producto,200);
+       
 
-        $producto->sucursales()->syncWithoutDetaching($sucursal);
+      
 
        // $sucursal->productos()->syncWithoutDetaching([$codigo]);
 
-        return $this->showOne($producto,200);
+        
     }
 
     /**
@@ -99,16 +107,9 @@ class ProductoController extends ApiController
      */
     public function update(Request $request, Producto $producto)
     {
-        $data = $request->except(['img']);
-
+        //$data = $request->except(['img']);
+        $data = $request->all();
         $producto->fill($data);
-
-       /*  if ($request->hasFile('img')) {
-            Storage::delete($producto->img);
-            $producto->img = $request->img->store('');
-        }
- */
-       
 
         if ($producto->isClean())
         {
@@ -128,7 +129,7 @@ class ProductoController extends ApiController
      */
     public function destroy(Producto $producto)
     {
-        //Storage::delete($producto->img);
+        
         $producto->delete();
 
         return $this->showOne($producto,200);

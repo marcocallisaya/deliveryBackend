@@ -50,7 +50,7 @@ class EmpleadoController extends ApiController
         $rules = [
             'name' => 'required',
             'lastname' => 'required',
-            'email' => 'required|email|unique:clientes',
+            'email' => 'required|email|unique:empleados',
             'password' => 'required|min:6', 
             'direction' => 'required', 
             'phone' => 'required', 
